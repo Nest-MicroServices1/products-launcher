@@ -1,0 +1,55 @@
+version: '3'
+
+
+services:
+
+
+  nats-server:
+    image: nats:latest
+    ports:
+      - "8222:8222"
+  client-geteway:
+    build: ./GeteWay
+    ports:
+      - ${CLIENT_GATEWAY_PORT}:3000
+    volumes:
+      - ./GeteWay/src:/usr/src/app/src
+    command: npm run start:dev
+    environment:
+      - PORT=3000
+      - NTAS_SERVERS=nats://nats-server:4222
+
+  product-ms:
+    build: ./products-microservice
+    volumes:
+      - ./products-microservice/src:/usr/src/app/src
+    command: npm run start:dev
+    environment:
+      - PORT=3001
+      - NTAS_SERVERS=nats://nats-server:4222
+      - DATABASE_URL=file:./dev.db
+
+  orders-ms:
+    depends_on:
+      - orders-db
+    build: ./OrderMicroservice
+    volumes:
+      - ./OrderMicroservice/src:/usr/src/app/src
+    command: npm run start:dev
+    environment:
+      - PORT=3002
+      - NTAS_SERVERS=nats://nats-server:4222
+      - DATABASE_URL=postgresql://postgres:1069K09jf@orders-db:5432/ordersdb?schema=public
+
+  orders-db:
+    container_name: orders_database
+    image: postgres:16.2
+    restart: always
+    volumes:
+      - ./OrderMicroservice/postgres:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1069K09jf
+      - POSTGRES_DB=ordersdb
