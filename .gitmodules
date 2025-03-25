@@ -1,0 +1,3 @@
+[submodule "GeteWay"]
+	path = GeteWay
+	url = https://github.com/Nest-MicroServices1/GeteWay.git
