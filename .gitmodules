@@ -1,3 +1,6 @@
 [submodule "GeteWay"]
 	path = GeteWay
 	url = https://github.com/Nest-MicroServices1/GeteWay.git
+[submodule "products-microservice"]
+	path = products-microservice
+	url = https://github.com/Nest-MicroServices1/products-microservice.git
