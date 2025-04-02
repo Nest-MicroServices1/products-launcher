@@ -36,3 +36,10 @@ Si se trabaja en el repositorio que tiene los sub-módulos, **primero actualizar
 
 Si se hace al revés, se perderán las referencias de los sub-módulos en el repositorio principal y tendremos que resolver conflictos.
 
+# Prod
+1. Clonar el repositrio 
+2. Crear el .env basado en el .env.tremplate
+3. Ejecutrar el comando 
+'''
+docker build -f dockerfile.prod -t gateway .
+'''

@@ -29,57 +29,57 @@ services:
       - DATABASE_URL=${AUTH_DATABASE_URL}
       - JWT_SECRET=${JWT_SECRET}
 
-#   product-ms:
-#     build: ./products-microservice
-#     volumes:
-#       - ./products-microservice/src:/usr/src/app/src
-#     command: npm run start:dev
-#     environment:
-#       - PORT=3001
-#       - NTAS_SERVERS=nats://nats-server:4222
-#       - DATABASE_URL=file:./dev.db
+  product-ms:
+    build: ./products-microservice
+    volumes:
+      - ./products-microservice/src:/usr/src/app/src
+    command: npm run start:dev
+    environment:
+      - PORT=3001
+      - NTAS_SERVERS=nats://nats-server:4222
+      - DATABASE_URL=file:./dev.db
 
-#   orders-ms:
-#     depends_on:
-#       - orders-db
-#     build: ./OrderMicroservice
-#     volumes:
-#       - ./OrderMicroservice/src:/usr/src/app/src
-#     command: npm run start:dev
-#     environment:
-#       - PORT=3002
-#       - NTAS_SERVERS=nats://nats-server:4222
-#       - DATABASE_URL=postgresql://postgres:1069K09jf@orders-db:5432/ordersdb?schema=public
+  orders-ms:
+    depends_on:
+      - orders-db
+    build: ./OrderMicroservice
+    volumes:
+      - ./OrderMicroservice/src:/usr/src/app/src
+    command: npm run start:dev
+    environment:
+      - PORT=3002
+      - NTAS_SERVERS=nats://nats-server:4222
+      - DATABASE_URL=postgresql://postgres:1069K09jf@orders-db:5432/ordersdb?schema=public
 
-#   orders-db:
-#     container_name: orders_database
-#     image: postgres:16.2
-#     restart: always
-#     volumes:
-#       - ./OrderMicroservice/postgres:/var/lib/postgresql/data
-#     ports:
-#       - 5432:5432
-#     environment:
-#       - POSTGRES_USER=postgres
-#       - POSTGRES_PASSWORD=1069K09jf
-#       - POSTGRES_DB=ordersdb
+  orders-db:
+    container_name: orders_database
+    image: postgres:16.2
+    restart: always
+    volumes:
+      - ./OrderMicroservice/postgres:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1069K09jf
+      - POSTGRES_DB=ordersdb
 
-# # =================================
-# # Payment Microservice
-# # =================================
-#   payment-ms:
-#     container_name: payment-ms
-#     build: ./payments-microservice
-#     volumes:
-#       - ./payments-microservice/src:/usr/src/app/src
-#     command: npm run start:dev
-#     ports:
-#       - ${PAYMENTS_MS_PORT}:${PAYMENTS_MS_PORT}
-#     environment:
-#       - PORT=${PAYMENTS_MS_PORT}
-#       - NTAS_SERVERS=nats://nats-server:4222
-#       - STRIPE_SECRET=${STRIPE_SECRET}
-#       - STRIPE_SUCCESS_URL=${STRIPE_SUCCESS_URL}
-#       - STRIPE_CANCEL_URL=${STRIPE_CANCEL_URL}
-#       - STRIPE_ENDPOINTSECRET=${STRIPE_ENDPOINTSECRET}
+# =================================
+# Payment Microservice
+# =================================
+  payment-ms:
+    container_name: payment-ms
+    build: ./payments-microservice
+    volumes:
+      - ./payments-microservice/src:/usr/src/app/src
+    command: npm run start:dev
+    ports:
+      - ${PAYMENTS_MS_PORT}:${PAYMENTS_MS_PORT}
+    environment:
+      - PORT=${PAYMENTS_MS_PORT}
+      - NTAS_SERVERS=nats://nats-server:4222
+      - STRIPE_SECRET=${STRIPE_SECRET}
+      - STRIPE_SUCCESS_URL=${STRIPE_SUCCESS_URL}
+      - STRIPE_CANCEL_URL=${STRIPE_CANCEL_URL}
+      - STRIPE_ENDPOINTSECRET=${STRIPE_ENDPOINTSECRET}
       
