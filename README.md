@@ -41,5 +41,5 @@ Si se hace al revés, se perderán las referencias de los sub-módulos en el rep
 2. Crear el .env basado en el .env.tremplate
 3. Ejecutrar el comando 
 '''
-docker build -f dockerfile.prod -t gateway .
+docker build -f dockerfile.prod.yml build
 '''
