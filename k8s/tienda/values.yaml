@@ -1,0 +1,8 @@
+replicaCount: 1
+image:
+  repository: northamerica-south1-docker.pkg.dev/microservice-nestjs-455616/image-registry/gateway-ms
+  tag: "latest"
+  pullPolicy: IfNotPresent
+service:
+  type: ClusterIP
+  port: 80

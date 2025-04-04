@@ -12,7 +12,7 @@ services:
     build: 
       context: ./GeteWay
       dockerfile: dockerfile.prod
-    image: northamerica-south1-docker.pkg.dev/microservice-nestjs-455616/image-registry/gateway-ms
+    image: northamerica-northeast1-docker.pkg.dev/tienda-microservice-455722/image-registry/client-gateway
     ports:
       - ${CLIENT_GATEWAY_PORT}:3000
     environment:
@@ -24,7 +24,7 @@ services:
     build: 
       context: ./auth-ms
       dockerfile: dockerfile.prod
-    image: northamerica-south1-docker.pkg.dev/microservice-nestjs-455616/image-registry/auth-ms
+    image: northamerica-northeast1-docker.pkg.dev/tienda-microservice-455722/image-registry/auth-ms
     environment:
       - PORT=3004
       - NTAS_SERVERS=nats://nats-server:4222
@@ -35,7 +35,7 @@ services:
     build: 
       context: ./products-microservice
       dockerfile: dockerfile.prod
-    image: northamerica-south1-docker.pkg.dev/microservice-nestjs-455616/image-registry/products-ms
+    image: northamerica-northeast1-docker.pkg.dev/tienda-microservice-455722/image-registry/products-ms
     environment:
       - PORT=3000
       - NTAS_SERVERS=nats://nats-server:4222
@@ -47,7 +47,7 @@ services:
       dockerfile: dockerfile.prod
       args:
         - ORDERS_DATABASE_URL=${ORDERS_DATABASE_URL}
-    image: northamerica-south1-docker.pkg.dev/microservice-nestjs-455616/image-registry/orders-ms
+    image: northamerica-northeast1-docker.pkg.dev/tienda-microservice-455722/image-registry/orders-ms
     environment:
       - PORT=3000
       - NTAS_SERVERS=nats://nats-server:4222
@@ -60,7 +60,7 @@ services:
     build:
       context: ./payments-microservice
       dockerfile: dockerfile.prod
-    image: northamerica-south1-docker.pkg.dev/microservice-nestjs-455616/image-registry/payment-ms
+    image: northamerica-northeast1-docker.pkg.dev/tienda-microservice-455722/image-registry/payment-ms
     ports:
       - ${PAYMENTS_MS_PORT}:${PAYMENTS_MS_PORT}
     environment:
